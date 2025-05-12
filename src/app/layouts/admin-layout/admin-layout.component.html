@@ -1,0 +1,59 @@
+<div class="min-h-screen flex bg-gray-100">
+
+    <!-- Sidebar -->
+    <aside [ngClass]="{
+    'w-64': isSidebarOpen,
+    'w-16': !isSidebarOpen
+  }"
+        class="bg-gray-800 shadow-md transition-all duration-300 ease-in-out overflow-hidden flex flex-col justify-between">
+        <ul class="mt-6 space-y-4 px-4">
+            <li>
+                <a routerLink="home" routerLinkActive="bg-blue-500"
+                    class="flex items-center space-x-2 text-slate-200 hover:bg-blue-500 p-2 rounded-md">
+                    <span class="material-icons"><i class="fa-solid fa-house"></i></span>
+                    <span *ngIf="isSidebarOpen">Home</span>
+                </a>
+            </li>
+            <li>
+                <a routerLink="about" routerLinkActive="bg-blue-500"
+                    class="flex items-center space-x-2 text-slate-200 hover:bg-blue-500 p-2 rounded-md">
+                    <span class="material-icons"><i class="fa-solid fa-address-book"></i></span>
+                    <span *ngIf="isSidebarOpen">About</span>
+                </a>
+            </li>
+        </ul>
+
+        <ul class="mt-6 mb-6 space-y-4 px-4">
+            <li>
+                <a routerLink="#" class="flex items-center space-x-2 text-slate-200 hover:bg-blue-500 p-2 rounded-md">
+                    <span class="material-icons"><i class="fa-solid fa-plane"></i></span>
+                    <span *ngIf="isSidebarOpen">Portal</span>
+                </a>
+            </li>
+            <li>
+                <a routerLink="#"
+                    class="flex items-center space-x-2 text-slate-200 bg-red-800 hover:bg-red-600 p-2 rounded-md">
+                    <span class="material-icons"><i class="fa-solid fa-right-from-bracket"></i></span>
+                    <span *ngIf="isSidebarOpen">Logout</span>
+                </a>
+            </li>
+        </ul>
+
+
+    </aside>
+
+    <!-- Main Content -->
+    <div class="flex-1 flex flex-col">
+        <!-- Header -->
+        <header class="bg-white px-6 py-4 shadow flex justify-between items-center">
+            <button (click)="toggleSidebar()" class="text-gray-600 hover:text-blue-600 focus:outline-none">
+                <span><i class="fa fa-bars text-xl"></i></span>
+            </button>
+            <h1 class="text-xl font-bold text-gray-800">Kanban Portal</h1>
+        </header>
+
+        <!-- Body -->
+        <main class="p-6">
+            <router-outlet></router-outlet>
+        </main>
+    </div>

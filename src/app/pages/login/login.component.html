@@ -1,0 +1,44 @@
+<!-- Form -->
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-5 w-72">
+    <div>
+        <label class="block text-sm font-medium text-gray-700">Username</label>
+        <input type="text" required formControlName="username"
+            class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-red-500 focus:border-red-500 text-sm" />
+        <div *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched"
+            class="text-red-500 text-sm">
+            <div *ngIf="loginForm.get('username')?.hasError('required')">Username is required.</div>
+            <div *ngIf="loginForm.get('username')?.hasError('minlength')">Username must be at least 6 characters long.
+            </div>
+            <div *ngIf="loginForm.get('username')?.hasError('maxlength')">Username cannot be longer than 50 characters.
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <label class="block text-sm font-medium text-gray-700">Password</label>
+        <input type="password" required formControlName="password"
+            class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-red-500 focus:border-red-500 text-sm" />
+        <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+            class="text-red-500 text-sm">
+            <div *ngIf="loginForm.get('password')?.hasError('required')">Password is required.</div>
+            <div *ngIf="loginForm.get('password')?.hasError('minlength')">Password must be at least 6 characters long.
+            </div>
+            <div *ngIf="loginForm.get('password')?.hasError('maxlength')">Password cannot be longer than 50 characters.
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="flex items-center justify-between text-sm">
+            <label class="flex items-center gap-2 text-gray-600">
+                <input type="checkbox" class="form-checkbox text-red-600" />
+                Remember me
+            </label>
+            <a href="#" class="text-red-600 hover:underline">Forgot password?</a>
+        </div> -->
+
+    <button type="submit" [disabled]="loginForm.invalid" class="w-full bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-lg shadow-sm transition duration-300 
+        disabled:bg-gray-400 disabled:text-gray-700 disabled:cursor-not-allowed disabled:shadow-none">
+        Log In
+    </button>
+
+</form>

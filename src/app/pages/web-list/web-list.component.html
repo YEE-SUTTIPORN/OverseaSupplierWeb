@@ -1,0 +1,65 @@
+<!-- Search Input -->
+<div class="max-w-6xl mx-auto text-center mb-8 px-6">
+    <input type="text" [(ngModel)]="searchQuery" (ngModelChange)="filterData()" placeholder="Search by Name or Group"
+        class="border-2 border-gray-300 rounded-lg p-3 text-lg w-full sm:w-96 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+</div>
+
+<div class="max-w-6xl mx-auto text-center mb-8 px-6">
+    <div class="inline-flex items-center space-x-4 text-sm font-medium">
+        <!-- General -->
+        <input type="radio" name="breadcrumb" id="general" class="hidden peer" checked />
+        <label for="general"
+            class="breadcrumb-item bg-white px-6 py-3 rounded-lg shadow-xl cursor-pointer hover:bg-blue-50 focus:outline-none focus:ring-4 focus:ring-blue-500 transition-all">General</label>
+        <span class="text-gray-400">/</span>
+
+        <!-- SAP -->
+        <input type="radio" name="breadcrumb" id="sap" class="hidden peer" />
+        <label for="sap"
+            class="breadcrumb-item bg-white px-6 py-3 rounded-lg shadow-xl cursor-pointer hover:bg-blue-50 focus:outline-none focus:ring-4 focus:ring-blue-500 transition-all">SAP</label>
+        <span class="text-gray-400">/</span>
+
+        <!-- Kanban -->
+        <input type="radio" name="breadcrumb" id="kanban" class="hidden peer" />
+        <label for="kanban"
+            class="breadcrumb-item bg-white px-6 py-3 rounded-lg shadow-xl cursor-pointer hover:bg-blue-50 focus:outline-none focus:ring-4 focus:ring-blue-500 transition-all">Kanban</label>
+        <span class="text-gray-400">/</span>
+
+        <!-- Employee -->
+        <input type="radio" name="breadcrumb" id="employee" class="hidden peer" />
+        <label for="employee"
+            class="breadcrumb-item bg-white px-6 py-3 rounded-lg shadow-xl cursor-pointer hover:bg-blue-50 focus:outline-none focus:ring-4 focus:ring-blue-500 transition-all">Employee</label>
+    </div>
+</div>
+
+
+<!-- Loading Spinner -->
+<div *ngIf="isLoading" class="flex justify-center items-center h-56">
+    <div class="w-16 h-16 border-4 border-t-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
+</div>
+
+<!-- Grouped Cards -->
+<div *ngIf="!isLoading" class="max-w-8xl mx-auto">
+    <!-- Loop through each group -->
+    <div *ngFor="let group of objectKeys(groupedWebData)">
+        <h3 class="text-xl font-semibold my-4">{{ group }}</h3>
+
+        <!-- Grid of Cards for each group -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+            <a *ngFor="let web of groupedWebData[group]" [routerLink]="web.Web_Url">
+                <div
+                    class="group bg-white rounded-2xl shadow-md p-6 flex items-center gap-4 border-gray-200 hover:border-red-500 hover:shadow-xl transition">
+                    <div
+                        class="bg-gradient-to-tr from-red-700 to-red-500 text-white rounded-full flex items-center justify-center shadow-inner">
+                        <!-- Icon -->
+                        <img [src]="web.Web_Image" alt="Web Icon" class="w-10 h-10 object-cover rounded-full" />
+                    </div>
+
+                    <div class="flex-1">
+                        <h4 class="text-base font-semibold group-hover:text-red-600 transition">{{ web.Web_Name }}</h4>
+                        <p class="text-xs text-gray-500">{{ web.Web_Group }}</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>

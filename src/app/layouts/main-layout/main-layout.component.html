@@ -1,0 +1,33 @@
+<div class="flex flex-col min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 px-6 py-4 font-sans text-gray-800">
+
+    <!-- Header -->
+    <header class="flex justify-between items-center border-b border-gray-300 pb-4 mb-10">
+        <a routerLink="web-list">
+            <div class="flex items-center gap-4">
+                <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="40" viewBox="0 0 224.9 193.97">
+                    <path fill="#e60012"
+                        d="m112.45 0 38.42 65.13-38.42 65.12L74.03 65.6Zm0 130.25h74.96l37.49 63.72h-74.97zm0 0H37.48L0 193.97h74.97z" />
+                </svg>
+                <span class="text-lg font-semibold tracking-wide">Protal Web</span>
+            </div>
+        </a>
+        <nav class="space-x-6 text-sm font-medium">
+            <a routerLink="web-list" class="hover:text-red-600 transition">
+                <i class="fas fa-home"></i> Home
+            </a>
+            <a routerLink="home" class="hover:text-red-600 transition">Admin</a>
+            <a routerLink="login" class="bg-red-500 p-2 text-white rounded-lg hover:bg-red-800 transition">Log
+                In</a>
+        </nav>
+    </header>
+
+    <main class="flex-1 px-6">
+        <router-outlet></router-outlet>
+    </main>
+
+    <footer class=" mt-16 border-t pt-6 pb-2 text-sm text-gray-500">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            © 2025 Mitsubishi Turbocharger Asia. All rights reserved.
+        </div>
+    </footer>
+</div>
