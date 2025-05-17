@@ -26,17 +26,9 @@ jobs:
           echo "Deploy Started"
 
           # FRONTEND
-          cd /var/www/myapp-frontend || exit 1
+          cd /var/www/frontend || exit 1
           git pull origin main
           npm install
           ng build --configuration production
           cp -r dist/* /var/www/html
-
-          # BACKEND
-          cd /var/www/myapp-backend || exit 1
-          git pull origin main
-          dotnet publish -c Release -o publish
-          systemctl restart myapp-api
-
-          echo "Deploy Completed"
         EOF
