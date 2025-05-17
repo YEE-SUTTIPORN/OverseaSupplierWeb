@@ -1,4 +1,4 @@
-name: Fullstack CI/CD
+name: Deploy Angular to VPS
 
 on:
   push:
@@ -10,25 +10,34 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout source code
       uses: actions/checkout@v3
 
-    - name: Setup SSH to VPS
+    - name: Setup SSH
       run: |
         mkdir -p ~/.ssh
         echo "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan -H 119.59.102.217 >> ~/.ssh/known_hosts
 
-    - name: Deploy to VPS
+    - name: Install Node.js and Angular CLI
+      run: |
+        curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+        sudo apt install -y nodejs
+        sudo npm install -g @angular/cli
+
+    - name: Install dependencies and build Angular
+      run: |
+        npm install
+        ng build --configuration production
+
+    - name: Copy built files to VPS
+      run: |
+        scp -r -i ~/.ssh/id_rsa ./dist/*/browser/* root@119.59.102.217:/var/www/html/
+
+    - name: Cleanup default nginx page
       run: |
         ssh root@119.59.102.217 << 'EOF'
-          echo "Deploy Started"
-
-          # FRONTEND
-          cd /var/www/frontend/OverseaSupplierWeb || exit 1
-          git pull origin main
-          npm install
-          ng build --configuration production
-          cp -r dist/* /var/www/html
+          rm -f /var/www/html/index.nginx-debian.html
+          echo "Deploy Completed"
         EOF
