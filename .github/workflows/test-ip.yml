@@ -1,0 +1,21 @@
+name: Test IP from Secret
+
+on:
+  workflow_dispatch:  # ให้รันมือได้
+
+jobs:
+  test-server-ip:
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+
+    steps:
+      - name: Echo IP from Secret
+        run: echo "The server IP is $SERVER_IP"
+        env:
+          SERVER_IP: ${{ secrets.SERVER_IP }}
+
+      - name: Try to ping (optional)
+        run: ping -c 4 $SERVER_IP || echo "Ping failed"
+        env:
+          SERVER_IP: ${{ secrets.SERVER_IP }}
