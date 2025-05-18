@@ -1,0 +1,17 @@
+<div class="max-w-4xl mx-auto grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <div *ngFor="let site of websites" class="bg-white shadow rounded-lg p-4">
+        <img [src]="site.ImageBase64" alt="{{ site.name }}" class="w-full h-32 object-cover rounded mb-3" />
+        <h2 class="text-lg font-semibold">{{ site.name }}</h2>
+        <p class="text-sm text-gray-600 mb-1">
+            {{ site.webDescription }}
+        </p>
+        <div class="text-sm text-gray-500">
+            <span *ngIf="site.ssoEnabled" class="text-green-600 font-medium">SSO Enabled</span>
+            <span *ngIf="!site.ssoEnabled" class="text-red-500">No SSO</span>
+        </div>
+        <a *ngIf="site.ssoEndpoint" [href]="site.ssoEndpoint" target="_blank"
+            class="block text-blue-600 text-sm mt-2 hover:underline">
+            Visit SSO
+        </a>
+    </div>
+</div>

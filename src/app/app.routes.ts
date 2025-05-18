@@ -6,6 +6,8 @@ import { IndexComponent } from './pages/index/index.component';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { LoginComponent } from './pages/login/login.component';
 import { WebListComponent } from './pages/web-list/web-list.component';
+import { WebsiteCreateComponent } from './pages/website-create/website-create.component';
+import { WebsiteComponent } from './pages/website/website.component';
 
 export const routes: Routes = [
     {
@@ -22,6 +24,8 @@ export const routes: Routes = [
         children: [
             { path: 'home', component: HomeComponent },
             { path: 'about', component: AboutComponent },
+            { path: 'website-create', component: WebsiteCreateComponent },
+            { path: 'website', component: WebsiteComponent },
             { path: '', redirectTo: '/home', pathMatch: 'full' }
         ]
     },

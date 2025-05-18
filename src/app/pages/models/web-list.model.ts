@@ -4,3 +4,13 @@ export interface WebListModel {
     Web_Group: string,
     Web_Url: string
 }
+
+
+export interface Website {
+    id: number;
+    name: string;
+    ssoEnabled: boolean;
+    ssoEndpoint: string;
+    webDescription: string;
+    ImageBase64: string;
+}
