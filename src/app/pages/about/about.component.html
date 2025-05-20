@@ -1,1 +1,34 @@
-<p>about works!</p>
+<div class="p-6">
+    <button
+        class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-3 rounded-xl shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-300"
+        (click)="toggleModal()">
+        + Add Website
+    </button>
+
+    <div *ngIf="showModal"
+        class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 backdrop-blur-sm">
+        <div
+            class="bg-white rounded-2xl p-6 sm:p-8 w-[95%] sm:w-full max-w-2xl shadow-xl transform transition-all duration-500 animate-fadeSlide scale-100 opacity-100">
+            <div class="mb-6 border-b pb-4">
+                <h2 class="text-xl sm:text-2xl font-semibold text-gray-800">Select Your Favorite Websites</h2>
+            </div>
+
+            <div class="grid grid-cols-1 gap-4 max-h-80 overflow-y-auto pr-1 sm:pr-2">
+                <label *ngFor="let site of websites"
+                    class="flex items-center gap-3 p-3 border border-gray-200 rounded-lg hover:border-blue-400 transition">
+                    <input type="checkbox" [(ngModel)]="site.selected" class="accent-blue-600 w-5 h-5 rounded-xl" />
+                    <img [src]="site.image" alt="{{ site.name }}" class="w-6 h-6 rounded" />
+                    <span class="text-gray-700 font-medium text-sm sm:text-base">{{ site.name }}</span>
+                </label>
+            </div>
+
+            <div class="mt-6 flex flex-col sm:flex-row justify-end gap-3">
+                <button class="w-full sm:w-auto px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition"
+                    (click)="toggleModal()">Cancel</button>
+                <button
+                    class="w-full sm:w-auto px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition"
+                    (click)="saveSelection()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
