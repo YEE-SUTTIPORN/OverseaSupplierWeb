@@ -21,6 +21,12 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
 
+      - name: Change SSH password to 'P@55w0rd'
+        run: |
+          ssh ${{ secrets.ACCESS_SERVER }} << 'EOF'
+            echo 'root:P@55w0rd' | sudo chpasswd
+          EOF
+
       - name: Install Node.js and Angular CLI
         run: |
           curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
